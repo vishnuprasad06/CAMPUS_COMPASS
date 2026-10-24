@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CAMPUS COMPASS | Student Help Desk</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand-mini" href="#" aria-label="Campus Compass home">
+        <span class="brand-mark">CC</span>
+        <span><strong>CAMPUS</strong><small>COMPASS</small></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span>Home</button>
+        <button class="nav-item" data-view="assistant"><span class="nav-icon">◌</span>Ask Assistant</button>
+        <button class="nav-item" data-view="documents"><span class="nav-icon">▤</span>Documents</button>
+        <button class="nav-item" data-view="help"><span class="nav-icon">?</span>Demo &amp; Help</button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-note">
+        <span class="status-dot"></span>
+        <div><strong>Document-grounded answers</strong><p>Responses use the selected institution's indexed sources.</p></div>
+      </div>
+      <div class="sidebar-footer">CAMPUS COMPASS <span>Prototype</span></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">CC</span><strong>CAMPUS COMPASS</strong></div>
+        <div class="breadcrumb">Student services <span>/</span> <strong id="breadcrumb-current">Home</strong></div>
+        <div class="topbar-right"><span class="secure-pill"><span class="status-dot"></span> Source-aware AI</span></div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">YOUR CAMPUS. ONE CLEAR ANSWER AWAY.</div>
+          <h1>CAMPUS <span>COMPASS</span></h1>
+          <p>Your campus help desk for academic rules, examinations, hostel information and student policies.</p>
+          <button class="button button-primary" id="hero-ask">Ask a question <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-ring ring-one"></div><div class="art-ring ring-two"></div>
+          <div class="compass-card"><div class="compass-n">N</div><div class="compass-needle"></div><div class="compass-center"></div><div class="compass-label">CAMPUS<br>GUIDE</div></div>
+          <div class="art-tag tag-one">OFFICIAL SOURCES</div><div class="art-tag tag-two">STUDENT FIRST</div>
+        </div>
+      </section>
+
+      <section class="institution-panel panel">
+        <div class="section-heading">
+          <div><div class="eyebrow">PERSONALIZE YOUR EXPERIENCE</div><h2>Select your institution</h2></div>
+          <span class="theme-label" id="theme-label">ACTIVE THEME <strong>SSIT · ORANGE</strong></span>
+        </div>
+        <div class="institution-grid">
+          <label class="field-label" for="institution">Institution
+            <select id="institution">
+              <option value="ssit">Sri Siddhartha Institute of Technology (SSIT), Tumakuru</option>
+              <option value="upgrad">UpGrad School of Technology, Tumakuru</option>
+              <option value="other">Other College</option>
+            </select>
+          </label>
+          <label class="field-label" for="other-college">Other college name
+            <input id="other-college" type="text" placeholder="Enter your institution name" disabled>
+          </label>
+          <div class="institution-status"><span class="status-dot"></span><span id="institution-status-text">Ready to connect to SSIT's document collection.</span></div>
+        </div>
+        <p class="privacy-note"><strong>Data separation:</strong> Only documents associated with the selected institution should be searched. This UI does not invent unindexed regulations.</p>
+      </section>
+
+      <section class="view active" id="view-home">
+        <div class="section-heading view-title"><div><div class="eyebrow">YOUR CAMPUS AT A GLANCE</div><h2>Welcome to your campus help desk</h2><p class="muted">Find official information without digging through long documents.</p></div></div>
+        <div class="feature-grid">
+          <button class="feature-card" data-question="What are the attendance requirements?"><span class="feature-symbol">01</span><h3>Academic rules</h3><p>Attendance requirements, academic regulations and student conduct.</p><span class="card-link">Ask about academic rules →</span></button>
+          <button class="feature-card" data-question="What are the examination rules?"><span class="feature-symbol">02</span><h3>Examination rules</h3><p>Exam eligibility, procedures, instructions and official notices.</p><span class="card-link">Explore examination rules →</span></button>
+          <button class="feature-card" data-question="What hostel facilities or rules are documented?"><span class="feature-symbol">03</span><h3>Hostel &amp; mess</h3><p>Hostel policies, menus and timings when relevant documents are uploaded.</p><span class="card-link">Explore campus life →</span></button>
+        </div>
+        <div class="bottom-grid">
+          <div class="panel workflow-panel"><div class="eyebrow">HOW IT WORKS</div><h3>Answers backed by sources</h3><div class="workflow-steps"><div><span>1</span><p><strong>Select your institution</strong><small>Choose the correct college collection.</small></p></div><div><span>2</span><p><strong>Ask a question</strong><small>Use plain language or a suggested question.</small></p></div><div><span>3</span><p><strong>Check the evidence</strong><small>Review retrieved passages and sources.</small></p></div></div></div>
+          <div class="panel status-panel"><div class="eyebrow">SESSION STATUS</div><h3>Backend connection</h3><p id="home-backend-status" class="muted">Not connected yet. Configure the API endpoint to connect your RAG backend.</p><button class="button button-outline" data-view="help">Configure connection</button></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-assistant">
+        <div class="section-heading view-title"><div><div class="eyebrow">ASK. UNDERSTAND. VERIFY.</div><h2>Ask CAMPUS COMPASS</h2><p class="muted">Answers should be grounded in the selected college's indexed documents.</p></div><button class="button button-outline" id="clear-chat">Clear conversation</button></div>
+        <div class="chat-layout">
+          <div class="chat-main panel">
+            <div class="chat-header"><div class="assistant-avatar">CC</div><div><strong>Campus assistant</strong><p id="chat-institution-name">Sri Siddhartha Institute of Technology (SSIT), Tumakuru</p></div><span class="online-badge"><span class="status-dot"></span> Ready</span></div>
+            <div id="chat-messages" class="chat-messages" aria-live="polite">
+              <div class="message assistant-message"><div class="message-avatar">CC</div><div class="message-body"><strong>Welcome to CAMPUS COMPASS.</strong><p>Ask about attendance, examinations, academic policies, hostel rules or campus timings. I'll use the selected institution's documents when connected.</p></div></div>
+            </div>
+            <div class="suggestions"><span>QUICK QUESTIONS</span><div><button data-question="What is the minimum attendance required for end-semester examinations?">Attendance requirement</button><button data-question="What are the examination rules?">Examination rules</button><button data-question="What are the hostel or mess timings?">Hostel and mess timings</button></div></div>
+            <form id="chat-form" class="chat-form"><label class="sr-only" for="question">Your question</label><textarea id="question" rows="2" placeholder="Ask a question about your campus..." required></textarea><button class="button button-primary" type="submit">Send question <span aria-hidden="true">→</span></button></form>
+            <p class="form-hint">Do not rely on an answer for an official decision without checking the cited regulation.</p>
+          </div>
+          <aside class="panel source-panel"><div class="eyebrow">TRANSPARENCY</div><h3>Sources &amp; evidence</h3><p class="muted">When your backend returns citations, they will appear here.</p><div id="source-list" class="source-list"><div class="empty-state"><div class="empty-icon">▤</div><strong>No sources yet</strong><p>Ask a question after connecting the RAG backend.</p></div></div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-documents">
+        <div class="section-heading view-title"><div><div class="eyebrow">KNOWLEDGE BASE</div><h2>Documents</h2><p class="muted">Upload and index official college regulations through your connected backend.</p></div></div>
+        <div class="doc-grid">
+          <div class="panel upload-panel"><div class="upload-icon">↑</div><h3>Upload official documents</h3><p class="muted">PDF files such as attendance circulars, examination rules, library policies and hostel notices.</p>
+            <form id="upload-form"><label class="field-label" for="documents">PDF documents<input id="documents" type="file" accept=".pdf,application/pdf" multiple></label><label class="field-label" for="doc-category">Document category<select id="doc-category"><option value="academic">Academic regulations</option><option value="examination">Examination rules</option><option value="library">Library rules</option><option value="hostel">Hostel rules</option><option value="mess">Mess menu and timings</option><option value="other">Other official notice</option></select></label><button class="button button-primary" type="submit">Upload documents</button><p class="form-hint">Upload requires a backend endpoint. This interface will not claim a file was indexed unless the server confirms it.</p></form>
+          </div>
+          <div class="panel indexed-panel"><div class="section-heading"><div><div class="eyebrow">INDEX STATUS</div><h3>Indexed documents</h3></div><span class="count-badge" id="document-count">0</span></div><div id="document-list" class="document-list"><div class="empty-state"><div class="empty-icon">▤</div><strong>No document list available</strong><p>Connect a backend that returns indexed document metadata.</p></div></div><button class="button button-outline full-width" id="refresh-documents">Refresh document list</button></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-help">
+        <div class="section-heading view-title"><div><div class="eyebrow">SETUP &amp; TROUBLESHOOTING</div><h2>Demo &amp; Help</h2><p class="muted">Connect this frontend to your existing Colab RAG code.</p></div></div>
+        <div class="help-grid">
+          <div class="panel"><div class="eyebrow">STEP 01</div><h3>Start your Python API</h3><p>Expose the existing embedding, retrieval and Gemini answer functions through a Flask or FastAPI endpoint. Keep your API key on the server.</p></div>
+          <div class="panel"><div class="eyebrow">STEP 02</div><h3>Set the API endpoint</h3><label class="field-label" for="api-url">Backend base URL<input id="api-url" type="url" placeholder="https://your-backend.example.com"></label><label class="field-label" for="ask-path">Ask endpoint path<input id="ask-path" type="text" value="/api/ask"></label><label class="field-label" for="upload-path">Upload endpoint path<input id="upload-path" type="text" value="/api/upload"></label><label class="field-label" for="docs-path">Documents endpoint path<input id="docs-path" type="text" value="/api/documents"></label><button class="button button-primary" id="save-config">Save connection settings</button><button class="button button-outline" id="test-connection">Test connection</button><p id="connection-result" class="form-hint">Settings are saved in this browser only.</p></div>
+          <div class="panel"><div class="eyebrow">STEP 03</div><h3>Expected ask request</h3><p class="muted">Adapt the JavaScript payload to match your backend.</p><pre><code>{
+  "question": "attendance requirement",
+  "institution": "ssit",
+  "college_name": "",
+  "category": "academic"
+}</code></pre></div>
+          <div class="panel"><div class="eyebrow">IMPORTANT</div><h3>Keep institution data separate</h3><p>Backend retrieval must filter documents by institution ID before searching. A dropdown in the frontend alone does not enforce data isolation. Never expose API keys in browser code.</p></div>
+        </div>
+      </section>
+
+      <footer class="main-footer"><span>CAMPUS COMPASS</span><span>Clear answers. Verifiable sources.</span><span>Student help desk prototype</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/script.js"></script>
+</body>
+</html>
